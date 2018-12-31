@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   courses$;
   courses;
   list$: AngularFireList<any[]>;
+  isUpdatePressed = false;
 
   constructor(private db: AngularFireDatabase) {}
 
@@ -30,8 +31,9 @@ export class AppComponent implements OnInit {
     course.value = '';
     }
 
-  update(course) {
-    this.db.object('/courses/' + course.key).set(course.value + ' UPDATED');
+  update(course, enteredValue) {
+    console.log(enteredValue.value);
+    this.db.object('/courses/' + course.key).set(enteredValue.value);
   }
 
   delete(course) {
